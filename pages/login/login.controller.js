@@ -2,11 +2,11 @@ app.controller("LoginCtrl", ["$scope", "$location","loginFactory", function($sco
     // $scope.user = 'alex9abril@gmail.com';
     // $scope.pass = 'qwerty';
 
-    $scope.user = '';
+    $scope.user = 'javier';
     $scope.pass = '';
 
     $scope.submit = function() {
-    	if( $scope.user == 'javier' && $scope.pass == '' ){
+    	if( $scope.user == '' && $scope.pass == '' ){
     		alert('Asegurate de proporcionar tus credenciales.');
     	}
     	else if( $scope.user == '' ){
