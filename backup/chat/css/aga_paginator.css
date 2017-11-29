@@ -1,0 +1,99 @@
+.aga-paginator{
+	background-color: #fff;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 77px;
+	border-top: solid 2px #f1f5f8;
+}
+
+.prev{
+	width: calc(50% - 30px);
+	margin: 0;
+	border: 0;
+	background-color: #fff;
+	font: 300 18px Roboto;
+	height: 75px;
+}
+
+.pag{ 
+	width: 50px;
+	margin: 0;
+	border: 0;
+	background-color: #fff;
+	font: 300 18px Roboto;
+	height: 75px;
+	text-align: center;
+}
+
+.pag i{
+	background-color: white;
+	padding: 10px;
+	border-radius: 50px;
+}
+
+.prev:hover, .next:hover, .pag:hover{
+}
+
+.prev:active, .next:active, .pag:active{
+	background-color: #f4f4f4;
+	// background-color: #e1e7ea;
+}
+
+.prev:focus, .next:focus, .pag:focus{
+    outline: none;
+}
+
+.next{
+	width: calc(50% - 30px);
+	margin: 0;
+	border: 0;
+	background-color: #fff;
+	font: 300 18px Roboto;
+	height: 75px;
+}
+
+.docs_loading{
+
+}
+
+.docs_loading i {
+	width: 39px;
+	height: 39px;
+	font-size: 40px;
+	text-align: center;
+	color: #999;
+
+	margin-top: 100%;
+	margin-left: calc(50% - 19px);
+
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 1s; /** Aquí controlamos la velocidad de la animación **/
+ 
+	-moz-transition-property: -moz-transform;
+	-moz-transition-duration: 1s; /** Aquí controlamos la velocidad de la animación **/
+
+	-webkit-animation-name: rotate;
+	-webkit-animation-duration: 1s; /** Aquí controlamos la velocidad de la animación **/
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+ 
+	-moz-animation-name: rotate;
+	-moz-animation-duration: 1s; /** Aquí controlamos la velocidad de la animación **/
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-timing-function: linear;
+}
+
+.f{
+	
+}
+
+@-webkit-keyframes rotate {
+	from {-webkit-transform: rotate(0deg);} /*** Estado inicial de la rotación ***/
+	to {-webkit-transform: rotate(360deg);} /*** Estado final de la rotación ***/
+}
+ 
+@-moz-keyframes rotate {
+	from {-moz-transform: rotate(0deg);} /*** Estado inicial de la rotación ***/
+	to {-moz-transform: rotate(360deg);} /*** Estado final de la rotación ***/
+}
