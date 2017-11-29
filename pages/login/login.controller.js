@@ -6,7 +6,7 @@ app.controller("LoginCtrl", ["$scope", "$location","loginFactory", function($sco
     $scope.pass = '';
 
     $scope.submit = function() {
-    	if( $scope.user == '' && $scope.pass == '' ){
+    	if( $scope.user == 'javier' && $scope.pass == '' ){
     		alert('Asegurate de proporcionar tus credenciales.');
     	}
     	else if( $scope.user == '' ){
