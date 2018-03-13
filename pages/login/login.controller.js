@@ -1,7 +1,4 @@
 app.controller("LoginCtrl", ["$scope", "$location","loginFactory", function($scope, $location, loginFactory) {
-    // $scope.user = 'alex9abril@gmail.com';
-    // $scope.pass = 'qwerty';
-
     $scope.user = '';
     $scope.pass = '';
 
@@ -20,11 +17,20 @@ app.controller("LoginCtrl", ["$scope", "$location","loginFactory", function($sco
 	    		var Resultado = result.data;
                 console.log( Resultado );
 	    		if( Resultado.success ){
-                    localStorage.setItem("Data_User", JSON.stringify(Resultado.data[0]));
-                    $location.path("/admin/agentes");
+                    localStorage.setItem("PuntoVentaUserData", JSON.stringify(Resultado.data[0]));
+                    console.log(Resultado.data[0].idCatalogoUsuario);
+
+                    if( parseInt(Resultado.data[0].idCatalogoUsuario) == 3 ){
+                        $location.path("/caja");
+                        // $location.path("/admin/productos");
+                    }
+                    else{
+                        $location.path("/admin/productos");
+                    }
+                    // $location.path("/admin/resumen");
 	    		}
 	    		else{
-	    			alert( Resultado.msg );
+	    			swal( "Punto de Venta", Resultado.msg );
 	    		}
 	        }, function(error){
 	            console.log("Error", error);

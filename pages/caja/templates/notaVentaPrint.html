@@ -1,0 +1,154 @@
+<title>NOTA VENTA {{sucNombreCorto}}{{ numero0( folio ) }}</title>
+<table border="0" width="100%" cellspacing="0" style="font-family: arial" class="nota">
+    <tr>
+        <td width="500" valign="top">
+        	<table width="100%" border="0">
+        		<tr>
+        			<td valign="middle" width="20%"> <img src="images/logo-circulo-3.png" width="60" style="margin-top: 5px;"> </td>
+        			<td valign="bottom"><h5 style="text-align: center;">FORRAJES AS DE OROS</h5></td>
+        			<td valign="bottom" width="20%"><h5 style="text-align: right;">FOLIO: <span style="color: red">{{sucNombreCorto}}{{ numero0( folio ) }}</span></h5></td>
+        		</tr>
+        		<tr>
+        			<td colspan="3">
+        				<table width="500">
+        					<tr>
+        						<td width="80"> <span style="font-size: 12px; font-weight: bold;">Cliente:</span> </td>
+        						<td width="290">_____________________________</td>
+        						<td width="200" style="text-align: right;"> <span style="font-size: 12px; font-weight: bold;">Fecha: {{ fechaStr }}</span> </td>
+        					</tr>
+        				</table>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td colspan="3" style="text-align: right;">&nbsp; <span style="font-size: 10px;">Original</span></td>
+        		</tr>
+        		<tr>
+        			<td colspan="3">
+        				<table id="example" class="table" width="100%" style="font-size: 11px;" border="1" cellspacing="0" cellpadding="2">
+					        <thead>
+					            <!-- <th>SKU</th> -->
+					            <th style="text-align: left;">PRODUCTO</th>
+					            <th style="text-align: right;">UNIDAD</th>
+					            <th width="60">CANTIDAD</th>
+					            <th width="60" style="text-align: right;">PRECIO</th>
+					            <th width="60" style="text-align: right;">IMPORTE</th>
+					        </thead>
+					        <tbody>
+					            <tr ng-repeat="(key, pro) in Carrito | filter: search" style="text-transform: uppercase;">
+					                <!-- <td>{{ pro.pro_sku }}</td> -->
+					                <td> <span ng-bind-html="pro.pro_nombre"></span> </td>
+					                <td ng-bind-html="pro.pro_unidad"></td>
+					                <td style="text-align: right;"> {{ pro.cantidad }} </td>
+					                <td style="text-align: right;">{{ pro.precio_venta | currency }}</td>
+					                <td style="text-align: right;">{{ pro.cantidad * pro.precio_venta | currency }}</td>
+					            </tr>
+
+					            <tr ng-repeat="rel in Relleno">
+					                <td colspan="5">&nbsp;</td>
+					            </tr>
+					        </tbody>
+					        <tfoot>
+					            <tr>
+					                <td style="text-align: right;" colspan="4"> <b>TOTAL:</b> </td>
+					                <td style="text-align: right;"> <b>{{ resumen.subtotal | currency }}</b> </td>
+					            </tr>
+					            <tr>
+					                <td colspan="5" style="text-align: right;">
+					                    {{ totalLetra }}
+					                </td>
+					            </tr>
+					        </tfoot>
+					    </table>
+
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td colspan="3">
+        				<p style="font-size: 12px; text-align: justify; margin-top: 10px;">Por este pagare debo (mos) incondicionalmente a la orden de OCTAVIO REYES ORTEGA el día {{ getFecha() }} la cantidad de suma a la que se le agregara un interés  monetario del 10% mensual por el tiempo que permanezca insoluto este documento.</p>
+
+        				<div style="width: 250px; margin: 50px auto; border-top: solid 1px black; font-size: 12px; text-align: center;">
+        					Firma de conformidad
+        				</div>
+        			</td>
+        		</tr>
+        	</table>
+        </td>
+        <td width="5">&nbsp;</td>
+        <td width="5" style="border-right: dashed 1px black;">&nbsp;</td>
+        <td width="10">&nbsp;</td>
+        <td width="500" valign="top">
+        	<table width="100%" border="0">
+        		<tr>
+        			<td valign="middle" width="20%"> <img src="images/logo-circulo-3.png" width="60" style="margin-top: 5px;"> </td>
+        			<td valign="bottom"><h5 style="text-align: center;">FORRAJES AS DE OROS</h5></td>
+        			<td valign="bottom" width="20%"><h5 style="text-align: right;">FOLIO: <span style="color: red">{{sucNombreCorto}}{{ numero0( folio ) }}</span></h5></td>
+        		</tr>
+        		<tr>
+        			<td colspan="3">
+        				<table width="500">
+        					<tr>
+        						<td width="80"> <span style="font-size: 12px; font-weight: bold;">Cliente:</span> </td>
+        						<td width="290">_____________________________</td>
+        						<td width="200" style="text-align: right;"> <span style="font-size: 12px; font-weight: bold;">Fecha: {{ fechaStr }}</span> </td>
+        					</tr>
+        				</table>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td colspan="3" style="text-align: right;">&nbsp; <span style="font-size: 10px;">Copia Cliente</span></td>
+        		</tr>
+        		<tr>
+        			<td colspan="3">
+        				<table id="example" class="table" width="100%" style="font-size: 11px;" border="1" cellspacing="0" cellpadding="2">
+					        <thead>
+					            <!-- <th>SKU</th> -->
+					            <th style="text-align: left;">PRODUCTO</th>
+					            <th style="text-align: right;">UNIDAD</th>
+					            <th width="60">CANTIDAD</th>
+					            <th width="60" style="text-align: right;">PRECIO</th>
+					            <th width="60" style="text-align: right;">IMPORTE</th>
+					        </thead>
+					        <tbody>
+					            <tr ng-repeat="(key, pro) in Carrito | filter: search" style="text-transform: uppercase;">
+					                <!-- <td>{{ pro.pro_sku }}</td> -->
+					                <td> <span ng-bind-html="pro.pro_nombre"></span> </td>
+					                <td ng-bind-html="pro.pro_unidad"></td>
+					                <td style="text-align: right;"> {{ pro.cantidad }} </td>
+					                <td style="text-align: right;">{{ pro.precio_venta | currency }}</td>
+					                <td style="text-align: right;">{{ pro.cantidad * pro.precio_venta | currency }}</td>
+					            </tr>
+
+					            <tr ng-repeat="rel in Relleno">
+					                <td colspan="5">&nbsp;</td>
+					            </tr>
+					        </tbody>
+					        <tfoot>
+					            <tr>
+					                <td style="text-align: right;" colspan="4"> <b>TOTAL:</b> </td>
+					                <td style="text-align: right;"> <b>{{ resumen.subtotal | currency }}</b> </td>
+					            </tr>
+					            <tr>
+					                <td colspan="5" style="text-align: right;">
+					                    {{ totalLetra }}
+					                </td>
+					            </tr>
+					        </tfoot>
+					    </table>
+
+        			</td>
+        		</tr>
+
+        		<tr>
+        			<td colspan="3">
+        				<p style="font-size: 12px; text-align: justify; margin-top: 10px;">Por este pagare debo (mos) incondicionalmente a la orden de OCTAVIO REYES ORTEGA el día {{ getFecha() }} la cantidad de suma a la que se le agregara un interés  monetario del 10% mensual por el tiempo que permanezca insoluto este documento.</p>
+
+        				<div style="width: 250px; margin: 50px auto; border-top: solid 1px black; font-size: 12px; text-align: center;">
+        					Firma de conformidad
+        				</div>
+        			</td>
+        		</tr>
+        	</table>
+        </td>
+    </tr>
+</table>

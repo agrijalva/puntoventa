@@ -1,0 +1,187 @@
+<div ng-init="init();">
+    <div class=jumbotron>
+        <div class=container>
+            <div class="row">   
+                <div class="col-sm-4"> <h4> <i class="fa fa-inbox" aria-hidden="true"></i> &nbsp; Productos</h4> </div>
+                <div class="col-sm-8">
+                    <div class="pull-right"> 
+                        <button class="pull-right btn btn-warning btn-rounded" ng-click="openModalNuevo()" ><span class="glyphicon glyphicon-plus"></span> Nuevo Producto</button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default panel-lg">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h5><b> <i class="fa fa-list" aria-hidden="true"></i> Listado</b></h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control search-input" ng-model="search" placeholder="Buscar ... ">
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <table id="example" class="table table-hover" width="100%">
+                                    <thead>
+                                        <th>SKU</th>
+                                        <th>PRODUCTO</th>
+                                        <th>DESCRIPCIÓN</th>
+                                        <th>UNIDAD</th>
+                                        <th width="50">-</th>
+                                        <th width="50">-</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="(key, pro) in Productos.data | filter: search" style="text-transform: uppercase;">
+                                            <td>{{ pro.pro_sku }}</td>
+                                            <td ng-bind-html="pro.pro_nombre"></td>
+                                            <td ng-bind-html="pro.pro_descripcion"></td>
+                                            <td ng-bind-html="pro.pro_unidad"></td>
+                                            <td>
+                                                <button class="btn btn-default dropdown-toggle btn-xs" type="button" ng-click="openModalEditar( key )">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-default dropdown-toggle btn-xs" type="button" ng-click="eliminar( key );">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <tr ng-show="!Productos.success">
+                                            <td colspan="6"> <i><i class="fa fa-info-circle" style="font-size: 18px" aria-hidden="true"></i> {{ Productos.msg }}</i> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    
+                </div>
+            </div>
+            <!-- <p> <a class="btn btn-primary btn-lg btn-outline btn-rounded">Learn more</a> </p> -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nuevo -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregue nuevo producto</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Por favor ingresa la siguiente información <small>(Los campos con * son obligatorios)</small></h5>
+                                <br>
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Código de identificación ID / SKU</b>
+                                <input type="" name="" class="form-control" ng-model="pro_sku">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Producto <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control" ng-model="pro_nombre">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Unidad <span class="text-danger">*</span></b>
+                                <select class="form-control" ng-model="pro_unidad">
+                                    <option value="0" selected="">-Seleccione-</option>
+                                    <option value="pza">PZA</option>
+                                    <option value="kg">KG</option>
+                                    <option value="bulto">BULTO</option>
+                                    <option value="caja">CAJA</option>
+                                    <option value="otro">OTRO</option>
+                                </select>
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Descripción <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control" ng-model="pro_descripcion">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning btn-rounded" ng-click="guardarNuevo();"> <i class="fa fa-plus"></i> Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nuevo -->
+<div class="modal fade" id="myModalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Editar Producto</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Por favor ingresa la siguiente información <small>(Los campos con * son obligatorios)</small></h5>
+                                <br>
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Código de identificación ID / SKU</b>
+                                <input type="" name="" class="form-control" ng-model="pro_sku">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Producto <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control" ng-model="pro_nombre">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Unidad <span class="text-danger">*</span></b>
+                                <select class="form-control" ng-model="pro_unidad">
+                                    <option value="0" selected="">-Seleccione-</option>
+                                    <option value="pza">PZA</option>
+                                    <option value="kg">KG</option>
+                                    <option value="bulto">BULTO</option>
+                                    <option value="caja">CAJA</option>
+                                    <option value="otro">OTRO</option>
+                                </select>
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Descripción <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control" ng-model="pro_descripcion">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning btn-rounded" ng-click="guardarEdicion();"> <i class="fa fa-plus"></i> Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>

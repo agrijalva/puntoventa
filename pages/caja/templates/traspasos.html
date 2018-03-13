@@ -1,0 +1,144 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h4 class="pull-left" style="text-align: left;"><span ng-bind-html="currentUser"></span><br><small>Usuario</small></h4>
+        </div>
+        <div class="col-md-9">
+            <br>
+            <div class="panel panel-default panel-lg">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div angucomplete-alt id="ex2" 
+                                 placeholder="SKU / Producto" 
+                                 pause="300" 
+                                 selected-object="countrySelected"
+                                 selected-object="selectedProducto" 
+                                 local-data="Autocomplete" 
+                                 title-field="pro_sku,pro_nombre"
+                                 minlength="1" 
+                                 input-class="form-control form-control-small" 
+                                 match-class="highlight" 
+                                 clear-selected = true
+                                 local-search="localSearch">
+                            </div>
+                        </div>
+                    </div>                            
+                </div>
+                <div class="panel-body" style="height: 450px; overflow-y: auto;">
+                    <div class="row">
+                        <table id="example" class="table table-hover" width="100%">
+                            <thead>
+                                <th>SKU</th>
+                                <th>PRODUCTO</th>
+                                <th>UNIDAD</th>
+                                <th width="100">CANTIDAD</th>
+                                <th width="250">OBSERVACIONES</th>
+                                <th width="100">-</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(key, pro) in Carrito | filter: search" style="text-transform: uppercase;">
+                                    <td>{{ pro.pro_sku }}</td>
+                                    <td>
+                                        <span ng-bind-html="pro.pro_nombre"></span><br>
+                                        <small><span ng-bind-html="pro.pro_descripcion"></span></small>
+                                    </td>
+                                    <td ng-bind-html="pro.pro_unidad"></td>
+                                    <td> <input class="form-control" type="" name="" ng-model="pro.cantidad" style="text-align: right;" ng-change="resumenVentas()"> </td> 
+                                    <td> <input class="form-control" type="" name="" ng-model="pro.entrada_descripcion"> </td>                                    
+                                    <td style="text-align: center;">
+                                        <button class="btn btn-default dropdown-toggle btn-xs" type="button" ng-click="quitar( key );">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr ng-repeat="n in [1,2,3]">
+                                    <td colspan="6">&nbsp;</td>
+                                </tr>
+
+                                <tr ng-show="!Productos.success">
+                                    <td colspan="6"> <i><i class="fa fa-info-circle" style="font-size: 18px" aria-hidden="true"></i> {{ Productos.msg }}</i> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <br>
+            <div class="panel panel-default panel-lg" style="border-color: #46b8da;">
+                <div class="panel-heading" style="background-color: #46b8da; color: white;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5><b> <i class="fa fa-list" aria-hidden="true"></i> Detalles del traspaso</b></h5>
+                        </div>
+                    </div>                            
+                </div>
+                <div class="panel-body" style="height: 450px;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="example" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td><h5>Tipo de traspado</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" ng-model="tipoTraspaso" ng-change="traspasoTipo()">
+                                                <option value="1">Entrada</option>
+                                                <option value="0">Salida</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><h5>Sucursal Origen</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" ng-model="idSucOrigen">
+                                                <option ng-repeat="(key, suc) in SucOrigen" value="{{ suc.idSucursal }}" ng-bind-html="suc.suc_nombre"></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><h5>Sucursal Destino</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" ng-model="idSucDestino">
+                                                <option ng-repeat="(key, suc) in SucDestino" value="{{ suc.idSucursal }}" ng-bind-html="suc.suc_nombre"></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><h5>Observaciones</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <textarea class="form-control" rows="5" placeholder="Observaciones" ng-model="obs_traspaso"></textarea>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td> 
+                                            <br>
+                                            <button class="btn btn-info" style="width: 100%" ng-click="procesarTraspaso();"> PROCESAR ENTRADA </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div procesar-traspaso class="procesaCompra" ng-show="procesaTraspaso"></div>

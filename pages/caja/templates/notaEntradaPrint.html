@@ -1,0 +1,114 @@
+<title>ENTRADA IN{{ numero0( folio ) }}</title>
+<table border="0" width="100%" cellspacing="0" style="font-family: arial" class="nota">
+    <tr>
+        <td width="500" valign="top">
+        	<table width="100%" border="0">
+        		<tr>
+        			<td valign="middle" width="20%"> <img src="images/logo-circulo-3.png" width="60" style="margin-top: 5px;"> </td>
+        			<td valign="bottom"><h5 style="text-align: center;">FORRAJES AS DE OROS</h5></td>
+        			<td valign="bottom" width="20%"><h5 style="text-align: right;">FOLIO: <span style="color: red">IN{{ numero0( folio ) }}</span></h5></td>
+        		</tr>
+        		<tr>
+        			<td colspan="3">
+        				<table width="500">
+        					<tr>
+        						<td width="80"> &nbsp; </td>
+                                <td width="290"> &nbsp; </td>
+        						<td width="200" style="text-align: right;"> <span style="font-size: 12px; font-weight: bold;">Fecha: {{ fechaStr }}</span> </td>
+        					</tr>
+        				</table>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td colspan="3" style="text-align: right;">&nbsp; <span style="font-size: 10px;">Original</span></td>
+        		</tr>
+        		<tr>
+        			<td colspan="3">
+        				<table id="example" class="table" width="100%" style="font-size: 11px;" border="1" cellspacing="0" cellpadding="2">
+					        <thead>
+					            <!-- <th>SKU</th> -->
+					            <th style="text-align: left;">PRODUCTO</th>
+					            <th style="text-align: right;">UNIDAD</th>
+					            <th width="60">CANTIDAD</th>
+					            <th>OBSERVACIONES</th>
+					        </thead>
+					        <tbody>
+					            <tr ng-repeat="(key, pro) in Carrito | filter: search" style="text-transform: uppercase;">
+					                <!-- <td>{{ pro.pro_sku }}</td> -->
+					                <td> <span ng-bind-html="pro.pro_nombre"></span> <span ng-bind-html="pro.pro_descripcion"></span> </td>
+					                <td ng-bind-html="pro.pro_unidad"></td>
+					                <td style="text-align: right;"> {{ pro.cantidad }} </td>
+					                <td>{{ pro.entrada_descripcion }}</td>
+					            </tr>
+
+					            <tr ng-repeat="rel in Relleno">
+					                <td colspan="5">&nbsp;</td>
+					            </tr>
+					        </tbody>
+					    </table>
+
+        			</td>
+        		</tr>
+                <tr>
+                    <td colspan="3" style="font-size: 12px;"><b>Observaciones: </b> {{entrada_observaciones}}</td>
+                </tr>
+        	</table>
+        </td>
+        <td width="5">&nbsp;</td>
+        <td width="5" style="border-right: dashed 1px black;">&nbsp;</td>
+        <td width="10">&nbsp;</td>
+        <td width="500" valign="top">
+        	<table width="100%" border="0">
+        		<tr>
+        			<td valign="middle" width="20%"> <img src="images/logo-circulo-3.png" width="60" style="margin-top: 5px;"> </td>
+        			<td valign="bottom"><h5 style="text-align: center;">FORRAJES AS DE OROS</h5></td>
+        			<td valign="bottom" width="20%"><h5 style="text-align: right;">FOLIO: <span style="color: red">IN{{ numero0( folio ) }}</span></h5></td>
+        		</tr>
+        		<tr>
+        			<td colspan="3">
+        				<table width="500">
+        					<tr>
+        						<td width="80"> &nbsp; </td>
+        						<td width="290"> &nbsp; </td>
+        						<td width="200" style="text-align: right;"> <span style="font-size: 12px; font-weight: bold;">Fecha: {{ fechaStr }}</span> </td>
+        					</tr>
+        				</table>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td colspan="3" style="text-align: right;">&nbsp; <span style="font-size: 10px;">Copia</span></td>
+        		</tr>
+        		<tr>
+        			<td colspan="3">
+        				<table id="example" class="table" width="100%" style="font-size: 11px;" border="1" cellspacing="0" cellpadding="2">
+					        <thead>
+                                <!-- <th>SKU</th> -->
+                                <th style="text-align: left;">PRODUCTO</th>
+                                <th style="text-align: right;">UNIDAD</th>
+                                <th width="60">CANTIDAD</th>
+                                <th>OBSERVACIONES</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(key, pro) in Carrito | filter: search" style="text-transform: uppercase;">
+                                    <!-- <td>{{ pro.pro_sku }}</td> -->
+                                    <td> <span ng-bind-html="pro.pro_nombre"></span> <span ng-bind-html="pro.pro_descripcion"></span> </td>
+                                    <td ng-bind-html="pro.pro_unidad"></td>
+                                    <td style="text-align: right;"> {{ pro.cantidad }} </td>
+                                    <td>{{ pro.entrada_descripcion }}</td>
+                                </tr>
+
+                                <tr ng-repeat="rel in Relleno">
+                                    <td colspan="5">&nbsp;</td>
+                                </tr>
+                            </tbody>
+					    </table>
+
+        			</td>
+        		</tr>
+                <tr>
+                    <td colspan="3" style="font-size: 12px;"><b>Observaciones: </b> {{entrada_observaciones}}</td>
+                </tr>
+        	</table>
+        </td>
+    </tr>
+</table>

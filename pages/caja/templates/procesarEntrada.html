@@ -1,0 +1,25 @@
+<div class="row" ng-show="!gracias">
+    <div nota-entrada class="col-sm-6"></div>
+    <div class="col-sm-6">
+        <div style="width: 300px; height: 100px; margin: 100px auto; background-color: white;">
+            <h4>Total de entradas:</h4>
+            <h1 style="font-size: 45px; text-align: center;"> {{ resumen.productos }} </h1>
+            <br>
+
+            <h4>Observaciones:</h4>
+            <textarea class="form-control" ng-model="entrada_observaciones"></textarea>
+            <br>
+            
+            <br>
+            <button class="btn btn-warning" style="width: 100%; height: 45px;" ng-click="finalizarEntrada();"> REGISTRAR ENTRADA </button>
+            <br><br>
+            <button class="btn btn-default" style="width: 100%" ng-click="procesarCancel();">Regresar</button>
+        </div>
+    </div>
+</div>
+<div class="row" ng-show="gracias">
+    <div style="width: 300px; margin: 150px auto; text-align: center;">
+        <img src="images/logo-circulo-3.png" width="180"><br>
+        <h1 style="font-size: 40px">¡Listo!</h1>        
+    </div>
+</div>

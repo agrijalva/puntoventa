@@ -2,7 +2,7 @@
 <html class=no-js>
     <head>
         <meta charset=utf-8>
-        <title>Gestor de contenido</title>
+        <title>Punto de Venta</title>
         <meta name=description>
         <meta name=viewport content="width=device-width">
         <link rel=stylesheet href=css/main.css>
@@ -10,7 +10,6 @@
         <link rel=stylesheet href="css/font-awesome/css/font-awesome.min.css">
     </head>
     <body ng-app=yapp>
-        <!-- Mi hermanito le gusta el chorrito -->
         <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->  
@@ -31,16 +30,24 @@
         <script src=scripts/vendor.js></script>
         <script src=scripts/scripts.js></script> 
 
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-sanitize.min.js"></script>
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-sanitize.min.js"></script> -->
+        <script type="text/javascript" src="scripts/recursos/angular-sanitize.min.js"></script>
         <script type="text/javascript" src="bower_components/ui-carousel-master/dist/ui-carousel.min.js"></script>
         <link rel="stylesheet" type="text/css" href="bower_components/ui-carousel-master/dist/ui-carousel.min.css">
 
+        <!-- Autocomplete -->
+        <link rel="stylesheet" type="text/css" href="scripts/angucomplete-alt/angucomplete-alt.css">
+        <script src="scripts/angucomplete-alt/angucomplete-alt.js"></script>
+
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+        <script type="text/javascript" src="scripts/recursos/bootstrap.min.js"></script>
 
         <!-- slick -->
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-        <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+        <!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/> -->
+        <!-- <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="scripts/recursos/slick.css"/>
+        <script type="text/javascript" src="scripts/recursos/slick.min.js"></script>        
 
         <!-- Sweetalert -->
         <link rel="stylesheet" type="text/css" href="bower_components/sweetalert/dist/sweetalert.css">
@@ -48,22 +55,51 @@
 
         <link rel="stylesheet" href="bower_components/DataTables/jquery.dataTables.min.css"/>
         <script type="text/javascript" src="bower_components/DataTables/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-datatables/2.1.0/angular-datatables.js"></script>
+        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-datatables/2.1.0/angular-datatables.js"></script> -->
 
         <script src="pages/login/login.controller.js"></script>
         <script src="pages/login/login.factory.js"></script>
 
+        <!-- Precios -->
+        <script type="text/javascript" src="pages/admin.controller.js"></script>
+
+        <!-- Caja -->
+        <script type="text/javascript" src="pages/caja/caja.controller.js"></script>
+        <script type="text/javascript" src="pages/caja/caja.factory.js"></script>
+        <script type="text/javascript" src="pages/caja/caja.directive.js"></script>
+
+        <!-- Configurador -->
+        <script type="text/javascript" src="pages/configurador/configurador.controller.js"></script>
+        <script type="text/javascript" src="pages/configurador/configurador.factory.js"></script>
+
+        <!-- Productos -->
+        <script type="text/javascript" src="pages/productos/productos.controller.js"></script>
+        <script type="text/javascript" src="pages/productos/productos.factory.js"></script>
+
+        <!-- Precios -->
+        <script type="text/javascript" src="pages/precios/precios.controller.js"></script>
+        <script type="text/javascript" src="pages/precios/precios.factory.js"></script>
+
+        <!-- ListaPrecios -->
+        <script type="text/javascript" src="pages/listaprecios/listaprecios.controller.js"></script>
+        <script type="text/javascript" src="pages/listaprecios/listaprecios.factory.js"></script>
+
+        <!-- inventarios -->
+        <script type="text/javascript" src="pages/inventarios/inventarios.controller.js"></script>
+        <script type="text/javascript" src="pages/inventarios/inventarios.factory.js"></script>
+
+        <script type="text/javascript" src="scripts/NumeroALetras.js"></script>
         <!-- Agentes -->
-        <script type="text/javascript" src="pages/agentes/agentes.controller.js"></script>
-        <script type="text/javascript" src="pages/agentes/agentes.factory.js"></script>
+        <!-- <script type="text/javascript" src="pages/agentes/agentes.controller.js"></script> -->
+        <!-- <script type="text/javascript" src="pages/agentes/agentes.factory.js"></script> -->
 
         <!-- Empresa -->
-        <script type="text/javascript" src="pages/empresas/empresa.controller.js"></script>
-        <script type="text/javascript" src="pages/empresas/empresa.factory.js"></script>
+        <!-- <script type="text/javascript" src="pages/empresas/empresa.controller.js"></script> -->
+        <!-- <script type="text/javascript" src="pages/empresas/empresa.factory.js"></script> -->
 
         <!-- Clientes -->
-        <script type="text/javascript" src="pages/clientes/clientes.controller.js"></script>
-        <script type="text/javascript" src="pages/clientes/clientes.factory.js"></script>
+        <!-- <script type="text/javascript" src="pages/clientes/clientes.controller.js"></script> -->
+        <!-- <script type="text/javascript" src="pages/clientes/clientes.factory.js"></script> -->
     
     </body>
 </html>

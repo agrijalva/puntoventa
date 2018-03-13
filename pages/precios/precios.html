@@ -1,0 +1,203 @@
+<div ng-init="init();">
+    <div class=jumbotron>
+        <div class=container>
+            <div class="row">
+                <div class="col-sm-4"> <h4> <i class="fa fa-usd" aria-hidden="true"></i> &nbsp; Lista de precios</h4> </div>
+                <div class="col-sm-8">
+                    <div class="pull-right">
+                        <button class="pull-right btn btn-warning btn-rounded" ng-click="openModalLista();">
+                            <span class="glyphicon glyphicon-plus"></span> Nueva lista de precios
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default panel-lg">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h5><b> <i class="fa fa-list" aria-hidden="true"></i> Listado</b></h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control search-input" ng-model="search" placeholder="Buscar ... ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <table id="example" class="table table-hover" width="100%">
+                                    <thead>
+                                        <th>#</th>
+                                        <th>NOMBRE DE LA LISTA</th>
+                                        <th>DESCRIPCIÓN</th>
+                                        <th>FECHA DE CREACIÓN</th>
+                                        <th>SUCURSAL</th>
+                                        <th>Estatus</th>
+                                        <th width="50">-</th>
+                                        <th width="50">-</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="(key, lpr) in Precios.data | filter: search | orderBy : 'lpr_estatus'">
+                                            <td>{{ key + 1 }}</td>
+                                            <td>
+                                                <a href="" style="color: #c00;" ng-click="detallePrecios( lpr.idListaPrecio )">
+                                                    <span ng-bind-html="lpr.lpr_nombre"></span>
+                                                </a>
+                                            </td>
+                                            <td ng-bind-html="lpr.lpr_descripcion"></td>
+                                            <td ng-bind-html="lpr.timestamp"></td>
+                                            <td ng-bind-html="lpr.suc_nombre"></td>
+                                            <td>
+                                                <span class="label label-info btn-rounded" ng-show="lpr.lpr_estatus == 1">
+                                                    &nbsp;&nbsp;Inactiva&nbsp;&nbsp;
+                                                </span>
+
+                                                <span class="label label-success btn-rounded" ng-show="lpr.lpr_estatus == 2">
+                                                    &nbsp;&nbsp;Activa&nbsp;&nbsp;
+                                                </span>
+
+                                                <span class="label label-default btn-rounded" ng-show="lpr.lpr_estatus == 3">
+                                                    &nbsp;&nbsp;Historico&nbsp;&nbsp;
+                                                </span>
+                                                <span>&nbsp;&nbsp;</span>
+
+                                                <button class="btn btn-info dropdown-toggle btn-xs" type="button" ng-show="lpr.lpr_estatus == 1 && lpr.successLista == 1" ng-click="activarListaPrecio(lpr.idListaPrecio, lpr.suc_nombre);" title="Activar lista de precios">
+                                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                                </button>
+
+                                                <i class="fa fa-exclamation-circle" 
+                                                   aria-hidden="true" 
+                                                   ng-show="lpr.lpr_estatus == 1 && lpr.successLista == 2"  
+                                                   title="La lista de precios aun no esta lista"
+                                                   style="font-size: 20px"></i>
+                                                
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-default dropdown-toggle btn-xs" type="button" ng-hide="lpr.lpr_estatus == 3" ng-click="openModalListaEditar( lpr.idListaPrecio );">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-default dropdown-toggle btn-xs" type="button" ng-show="lpr.lpr_estatus == 1" ng-click="eliminarLista( lpr.idListaPrecio );">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <tr ng-show="!Precios.success">
+                                            <td colspan="8"> <i><i class="fa fa-info-circle" style="font-size: 18px" aria-hidden="true"></i> {{ Precios.msg }}</i> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    
+                </div>
+            </div>
+            <!-- <p> <a class="btn btn-primary btn-lg btn-outline btn-rounded">Learn more</a> </p> -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edición -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregue nueva lista de precios</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Por favor ingresa la siguiente información <small>(Los campos con * son obligatorios)</small></h5>
+                                <br>
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Nombre de la Lista <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control" ng-model="lpr_nombre">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Descripción <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control" ng-model="lpr_descripcion">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Sucursal <span class="text-danger">*</span></b>
+                                <select class="form-control" ng-model="idSucursal">
+                                    <option value="0" selected="">-Selecciona-</option>
+                                    <option ng-repeat="(key, suc) in DataUser.sucursales" value="{{suc.idSucursal}}" ng-bind-html="suc.suc_nombre"></option>
+                                </select>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning btn-rounded" ng-click="nuevaLista()"> <i class="fa fa-plus"></i> Crear lista</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nuevo -->
+<div class="modal fade" id="myModalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modificar lista de precios</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Por favor ingresa la siguiente información <small>(Los campos con * son obligatorios)</small></h5>
+                                <br>
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Nombre de la Lista <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control" ng-model="lpr_nombre">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Descripción <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control" ng-model="lpr_descripcion">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Sucursal <span class="text-danger">*</span></b>
+                                <select class="form-control" ng-model="idSucursal" disabled="">
+                                    <option value="0" selected="">-Selecciona-</option>
+                                    <option ng-repeat="(key, suc) in DataUser.sucursales" value="{{suc.idSucursal}}" ng-bind-html="suc.suc_nombre"></option>
+                                </select>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning btn-rounded" ng-click="actualizarLista()"> <i class="fa fa-pencil"></i> Actualizar lista</button>
+            </div>
+        </div>
+    </div>
+</div>

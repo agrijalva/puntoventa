@@ -1,0 +1,127 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h4 class="pull-left" style="text-align: left;"><span ng-bind-html="currentUser"></span><br><small>Vendedor</small></h4>
+        </div>
+        <div class="col-md-6">
+            <h4 class="pull-right" style="text-align: right;">Cliente de Mostrador<br><small>XAXX010101000</small></h4>
+        </div>
+        <div class="col-md-9">
+            <br>
+            <div class="panel panel-default panel-lg">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div angucomplete-alt id="ex2" 
+                                 placeholder="SKU / Producto" 
+                                 pause="300" 
+                                 selected-object="countrySelected"
+                                 selected-object="selectedProducto" 
+                                 local-data="Autocomplete" 
+                                 title-field="pro_sku,pro_nombre"
+                                 minlength="1" 
+                                 input-class="form-control form-control-small" 
+                                 match-class="highlight" 
+                                 clear-selected = true
+                                 local-search="localSearch">
+                            </div>
+                            <!-- <h5><b> <i class="fa fa-list" aria-hidden="true"></i> Detalle</b></h5> -->
+                        </div>
+                    </div>                            
+                </div>
+                <div class="panel-body" style="height: 450px; overflow-y: auto;">
+                    <div class="row">
+                        <table id="example" class="table table-hover" width="100%">
+                            <thead>
+                                <th>SKU</th>
+                                <th>PRODUCTO</th>
+                                <th>UNIDAD</th>
+                                <th width="100">CANTIDAD</th>
+                                <th width="100" style="text-align: right;">PRECIO</th>
+                                <th width="100" style="text-align: right;">IMPORTE</th>
+                                <th width="100">-</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(key, pro) in Carrito | filter: search" style="text-transform: uppercase;">
+                                    <td>{{ pro.pro_sku }} {{ pro.sto_cantidad }}</td>
+                                    <td>
+                                        <span ng-bind-html="pro.pro_nombre"></span><br>
+                                        <small><span ng-bind-html="pro.pro_descripcion"></span></small>
+                                    </td>
+                                    <td ng-bind-html="pro.pro_unidad"></td>
+                                    <td> 
+                                        <input  class="form-control" 
+                                                ng-model="pro.cantidad"
+                                                style="text-align: right;"
+                                                ng-change="resumenVentas()"
+                                                ng-blur="validaVacios( key );">
+                                    </td>
+                                    <td style="text-align: right;">{{ pro.precio_venta | currency }}</td>
+                                    <td style="text-align: right;">{{ pro.cantidad * pro.precio_venta | currency }}</td>
+                                    <td style="text-align: center;">
+                                        <button class="btn btn-default dropdown-toggle btn-xs" type="button" ng-click="quitar( key );">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr ng-show="!Productos.success">
+                                    <td colspan="6"> <i><i class="fa fa-info-circle" style="font-size: 18px" aria-hidden="true"></i> {{ Productos.msg }}</i> </td>
+                                </tr>
+                                
+                                <tr ng-repeat="n in [1,2,3]">
+                                    <td>&nbsp;</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <br>
+            <div class="panel panel-default panel-lg" style="border-color: #d43f3a;">
+                <div class="panel-heading" style="background-color: #d43f3a; color: white;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5><b> <i class="fa fa-list" aria-hidden="true"></i> Resumen de la Compra</b></h5>
+                        </div>
+                    </div>                            
+                </div>
+                <div class="panel-body" style="height: 450px;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="example" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td><h5>TOTAL ({{ resumen.productos }})</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td> <h2 style="text-align: center;">{{ resumen.subtotal | currency }}</h2> </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td> 
+                                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                            <button class="btn btn-danger" style="width: 100%" ng-click="procesarCompra();"> PROCESAR COMPRA </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div procesar-compra class="procesaCompra" ng-show="procesaCompra"></div>

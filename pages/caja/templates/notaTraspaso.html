@@ -1,0 +1,62 @@
+<div class="col-sm-3">
+    <center>
+    <img src="images/logo-circulo-3.png" width="60%" style="margin-top: 5px;">
+    </center>
+</div>
+<div class="col-sm-9">
+    <h1>FORRAJERA AS DE OROS<br><br></h1>
+</div>
+
+<!-- Linea de datos del cliente -->
+<div class="col-sm-12">
+    <div class="row">
+        <div class="col-sm-3">
+            <span style="font-size: 14px; font-weight: bold;">Sucursal Origen:</span>
+        </div>
+        <div class="col-sm-6">
+            <div style="width: 100%;">{{nameSucOrigen}}</div>
+        </div>
+        <div class="col-sm-3">
+            <span style="font-size: 14px; font-weight: bold;">Fecha: {{ fechaStr }}</span>
+        </div>
+    </div>
+    <!-- Linea de datos del cliente -->
+    <div class="row">
+        <div class="col-sm-3">
+            <span style="font-size: 14px; font-weight: bold;">Sucursal Destino:</span>
+        </div>
+        <div class="col-sm-6">
+            <div style="width: 100%;">{{nameSucDestino}}</div>
+        </div>
+        <div class="col-sm-3">
+            <span style="font-size: 14px; font-weight: bold;">&nbsp;</span>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <table id="example" class="table" width="100%">
+        <thead>
+            <th>SKU</th>
+            <th>PRODUCTO</th>
+            <th>UNIDAD</th>
+            <th width="80">CANTIDAD</th>
+            <th>DESCRIPCION</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(key, pro) in Carrito | filter: search" style="text-transform: uppercase;">
+                <td>{{ pro.pro_sku }}</td>
+                <td> <span ng-bind-html="pro.pro_nombre"></span> <span ng-bind-html="pro.pro_descripcion"></span> </td>
+                <td ng-bind-html="pro.pro_unidad"></td>
+                <td style="text-align: right;"> {{ pro.cantidad }} </td>
+                <td>{{ pro.entrada_descripcion }}</td>
+            </tr>
+
+            <tr ng-repeat="rel in Relleno">
+                <td colspan="5">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div nota-traspaso-print style="display: none;" id="notaTraspaso" ></div>

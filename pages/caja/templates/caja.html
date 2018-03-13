@@ -1,0 +1,52 @@
+<div ng-init="init();">
+    <div>
+        <div class="row">   
+            <div class="col-sm-12" style="border: solid 1px #ddd;">
+                <div style="width: 200px; margin-left: 15px; margin-top: 5px; height: 60px; overflow: hidden; float: left;">
+                    <div style="float: left; width: 50px; margin-right: 5px; ">
+                        <img src="images/logo-circulo-3.png" width="100%" style="margin-top: 5px;">
+                    </div>
+                    <div style="float: left; width: 145px">
+                        <small>Bienvenido</small>
+                        <br> 
+
+                        <a href="#/admin/inventarios" style="color: #c00" ng-hide="idCatalogoUsuario != 3"><small>Administrador</small></a>
+                        <a href="#/admin/productos" style="color: #c00" ng-hide="idCatalogoUsuario == 3"><small>Administrador</small></a>
+                         |
+                        <a href="#/login" style="color: #c00" ><small>Salir</small></a>
+                    </div>
+                </div>
+
+                <div class="pull-right" style=" float: left; padding-top: 5px; width: 350px">
+                    <div class="dropdown" style="float: right; margin-right: 5px; ">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="fa fa-bars" aria-hidden="true"></i><br>
+                            <small>Opciones</small>
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="" ng-click="showPVenta()">Punto de Venta</a></li>
+                        <li ng-show="idCaja != 0"><a href="" ng-click="showGastos()">Caja</a></li>
+                        <li  ng-hide="idCatalogoUsuario == 3"><a href="" ng-click="showEntradas()">Entradas</a></li>
+                        <li><a href="" ng-click="showMexclas()">Mezclas</a></li>
+                        <li><a href="" ng-click="showTraspasos()">Traspaso</a></li>
+                        <li ng-show="idCaja != 0" role="separator" class="divider"></li>
+                        <li ng-show="idCaja != 0"><a href="" ng-click="setfechacierre()">Cerrar Caja</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=container>
+            <div no-caja-activa ng-show="procesaCaja"></div>
+            <div punto-venta ng-show="ventaBool"></div>
+            <div entradas-stock ng-show="entradasBool"></div>
+            <div traspasos ng-show="tarspasoBool"></div>
+            <div mezclas ng-show="mezclasBool"></div>
+            <div gastos ng-show="gastosBool"></div>
+            <div caja-cierre ng-show="cajacierreBool"></div>
+        </div>
+    </div>
+</div>
+
+<div modal-mezclas></div>

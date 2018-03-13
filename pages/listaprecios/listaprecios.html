@@ -1,0 +1,140 @@
+<div ng-init="init();">
+    <div class=jumbotron>
+        <div class=container>
+            <div class="row">   
+                <div class="col-sm-8"> 
+                    <h3> <i class="fa fa-usd" aria-hidden="true"></i> &nbsp; {{ tituloLista }}</h3>
+                </div>
+
+                <div class="col-sm-4"> 
+                    <a class="pull-right btn btn-default btn-rounded" ng-show="successLista == 0" ng-click="cargaPrecioAnterior();">
+                        &nbsp;&nbsp;<i class="fa fa-sliders" aria-hidden="true"></i>&nbsp; Cargar lista de precios anterior&nbsp;&nbsp;
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default panel-lg">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h5><b> <i class="fa fa-list" aria-hidden="true"></i> Listado</b></h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control search-input" ng-model="search" placeholder="Buscar ... ">
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <table id="example" class="table table-hover" width="100%">
+                                    <thead>
+                                        <th>SKU</th>
+                                        <th>PRODUCTO</th>
+                                        <th>DESCRIPCIÓN</th>
+                                        <th>UNIDAD</th>                                        
+                                        <th width="40">PRECIO/COMPRA</th>
+                                        <th width="40">PRECIO/VENTA</th>
+                                        <th width="50">_</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="(key, pro) in Productos.data | filter: search" style="text-transform: uppercase;">
+                                            <td>{{ pro.pro_sku }}</td>
+                                            <td ng-bind-html="pro.pro_nombre"></td>
+                                            <td ng-bind-html="pro.pro_descripcion"></td>
+                                            <td ng-bind-html="pro.pro_unidad"></td>
+                                            <td>
+                                                <input type="" name="" class="form-control input-price" placeholder="0.00" ng-model="pro.precioCosto">
+                                            </td>
+                                            <td>
+                                                <input type="" name="" class="form-control input-price" placeholder="{{pro.precioVentaPrevio}}" ng-model="pro.precioVenta">
+                                            </td>
+                                            <td>
+                                                <a ng-show="pro.request.data.success == false" href="#" data-toggle="tooltip" title="{{pro.request.data.msg}}" class="text-danger" style="font-size: 20px">
+                                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                                </a>
+
+                                                <a ng-show="pro.request.data.success == true" href="#" data-toggle="tooltip" title="{{pro.request.data.msg}}" class="text-success" style="font-size: 20px">
+                                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+
+                                        <tr ng-show="!Productos.success">
+                                            <td colspan="6"> <i><i class="fa fa-info-circle" style="font-size: 18px" aria-hidden="true"></i> {{ Productos.msg }}</i> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a ui-sref=precios class="pull-left btn btn-default btn-rounded">
+                                        &nbsp;&nbsp;<i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp; Regresar&nbsp;&nbsp;
+                                    </a>
+                                    <button class="pull-right btn btn-warning btn-rounded" ng-click="guardarPrecios();">
+                                        &nbsp;&nbsp;<i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Guardar lista de precios&nbsp;&nbsp;
+                                    </button>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <p> <a class="btn btn-primary btn-lg btn-outline btn-rounded">Learn more</a> </p> -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nuevo -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregue nuevo producto</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Por favor ingresa la siguiente información <small>(Los campos con * son obligatorios)</small></h5>
+                                <br>
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Código de identificación ID / SKU</b>
+                                <input type="" name="" class="form-control">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Producto <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Unidad <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Descripción <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning btn-rounded"> <i class="fa fa-plus"></i> Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>

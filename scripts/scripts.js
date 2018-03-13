@@ -1,6 +1,7 @@
 "use strict";
-var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.carousel"]).config(["$stateProvider", "$urlRouterProvider", function(r, t) {
-    t.when("/admin", "/admin/overview"), t.otherwise("/login"), r.state("base", {
+var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.carousel","angucomplete-alt"]).config(["$stateProvider", "$urlRouterProvider", function(r, t) {
+    t.when("/admin", "/admin/overview"), t.otherwise("/login"), 
+    r.state("base", {
         "abstract": !0,
         url: "",
         templateUrl: "pages/base.html"
@@ -17,56 +18,74 @@ var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.car
         parent: "base",
         cache:false,
         templateUrl: "pages/admin.html",
-        controller: "DashboardCtrl"
-    })
-    .state("agentes", {
-        url: "/agentes",
+        controller: "AdminCtrl"
+    })    
+    .state("resumen", {
+        url: "/resumen",
         parent: "admin",
         cache:false,
-        templateUrl: "pages/agentes/templates/agentes.html",
-        controller: "AgentesCtrl"
+        templateUrl: "pages/configurador/configurador.html",
+        controller: "ConfiguradorCtrl"
     })
-    .state("agente_detalle", {
-        url: "/agente_detalle",
+    .state("productos", {
+        url: "/productos",
         parent: "admin",
         cache:false,
-        templateUrl: "pages/agentes/templates/editar_agente.html",
-        controller: "AgentesCtrl"
+        templateUrl: "pages/productos/productos.html",
+        controller: "ProductosCtrl"
     })
-    .state("nuevo_agente", {
-        url: "/nuevo_agente",
+    .state("precios", {
+        url: "/precios",
         parent: "admin",
         cache:false,
-        templateUrl: "pages/agentes/templates/nuevo_agente.html",
-        controller: "AgentesCtrl"
+        templateUrl: "pages/precios/precios.html",
+        controller: "PreciosCtrl"
     })
-    .state("clientes", {
-        url: "/clientes",
+    .state("listaprecios", {
+        url: "/listaprecios",
         parent: "admin",
         cache:false,
-        templateUrl: "pages/clientes/templates/clientes.html",
-        controller: "ClientesCtrl"
+        templateUrl: "pages/listaprecios/listaprecios.html",
+        controller: "ListapreciosCtrl"
     })
-    .state("nuevo_cliente", {
-        url: "/nuevo_cliente",
+    .state("inventarios", {
+        url: "/inventarios",
         parent: "admin",
         cache:false,
-        templateUrl: "pages/clientes/templates/nuevo_cliente.html",
-        controller: "ClientesCtrl"
+        templateUrl: "pages/inventarios/templates/inventarios.html",
+        controller: "InventariosCtrl"
     })
-    .state("cliente_detalle", {
-        url: "/cliente_detalle",
+    .state("stock", {
+        url: "/stock",
         parent: "admin",
         cache:false,
-        templateUrl: "pages/clientes/templates/cliente_detalle.html",
-        controller: "ClientesCtrl"
+        templateUrl: "pages/inventarios/templates/stock.html",
+        controller: "InventariosCtrl"
+    })
+    .state("registroinventario", {
+        url: "/registroinventario",
+        parent: "admin",
+        cache:false,
+        templateUrl: "pages/inventarios/templates/registroinventario.html",
+        controller: "InventariosCtrl"
+    })
+    .state("caja", {
+        url: "/caja",
+        parent: "base",
+        cache:false,
+        templateUrl: "pages/caja/templates/caja.html",
+        controller: "CajaCtrl"
     })
 }]);
 
-var API_Path = "http://localhost/APIForrajera/v1/index.php"
-// var API_Path = "http://pfiscal.loladisenio.com.mx/restapi/v1/index.php";
+
+var API_Path = "http://localhost/puntoventaAPI/v1/index.php"
 var Authorization = 'eb60959f5eac3e1d081244c33d4fb850';
 
+
+
 angular.module("yapp").controller("DashboardCtrl", ["$scope", "$state", function(r, t) {
+
     r.$state = t
+
 }]);

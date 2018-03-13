@@ -3,13 +3,36 @@
         <div class=row>
             <div class="col-sm-3 col-md-2 sidebar">
                 <div class=text-center>
-                    <h4 class=brand>Administrador <br>de cuentas</h4>
-                    <img src="images/logofinal.png" width="80%"><br><br> <a ui-sref=login class="btn btn-white btn-outline btn-rounded btn-sm">Cerrar Sesión</a> 
+                    <h4 class=brand><b>Punto de Venta</b></h4><br>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img src="images/logo-circulo-3.png" width="150%" style="margin-top: 5px;">
+                        </div>
+                        <div class="col-sm-8" style="text-align: left;">
+                            <small>Bienvenido,</small><br>
+                            <b><span ng-bind-html="currentUser"></span></b>
+                        </div>
+                    </div>
+                    <br> <a ui-sref=login class="btn btn-white btn-outline btn-rounded btn-sm">Cerrar Sesión</a> 
                 </div>
                 <ul class="nav nav-sidebar">
-                    <li ng-class="{active: $state.includes('agentes')}"><a ui-sref=agentes>Agentes</a></li>
-                    <li ng-class="{active: $state.includes('clientes')}"><a ui-sref=clientes>Clientes <span class=sr-only>(current)</span></a></li>
-                    <li ng-class="{active: $state.includes('reports')}"><a ui-sref=reports>Reportes</a></li>
+                    <li ng-class="{active: $state.includes('caja')}" class="caja">
+                        <a href="#/caja"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp; Caja</a>
+                    </li>
+                    <!-- <li ng-class="{active: $state.includes('resumen')}">
+                        <a ui-sref=resumen><i class="fa fa-tachometer" aria-hidden="true"></i> &nbsp; Resumen</a>
+                    </li> -->
+                    <li ng-class="{active: $state.includes('productos')}" ng-hide="idCatalogoUsuario == 3">
+                        <a ui-sref=productos><i class="fa fa-inbox" aria-hidden="true"></i> &nbsp; Productos</a>
+                    </li>
+                    <li ng-class="{active: $state.includes('precios')}" ng-hide="idCatalogoUsuario == 3">
+                        <a ui-sref=precios> <i class="fa fa-usd" aria-hidden="true"></i> &nbsp;&nbsp; Lista de Precios</a>
+                    </li>
+                    <li ng-class="{active: $state.includes('inventarios')}">
+                        <a ui-sref=inventarios><i class="fa fa-list-alt" aria-hidden="true"></i> &nbsp; Inventarios</a>
+                    </li>
+                    <!-- <li ng-class="{active: $state.includes('clientes')}"><a ui-sref=clientes>Clientes <span class=sr-only>(current)</span></a></li> -->
+                    <!-- <li ng-class="{active: $state.includes('reports')}"><a ui-sref=reports>Reportes</a></li> -->
                     <!-- <li ng-class="{active: $state.includes('catalogo')}"><a ui-sref=catalogo>Catalogos</a></li> -->
                 </ul>
             </div>

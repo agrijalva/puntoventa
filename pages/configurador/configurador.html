@@ -1,0 +1,141 @@
+<div ng-init="Init();">
+    <div class=jumbotron>
+        <div class=container>
+            <div class="row">   
+                <div class="col-sm-4"> <h4> <i class="fa fa-line-chart" aria-hidden="true"></i> &nbsp; Resumen Mensual</h4> </div>
+                <div class="col-sm-8">
+                    <!-- <div class="pull-right"> 
+                        <a ui-sref=nuevo_agente class="pull-right btn btn-primary btn-outline btn-rounded"><span class="glyphicon glyphicon-plus"></span> Nuevo Agente</a>
+                    </div> -->
+                </div>
+            </div>            
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label>Fecha Inicio</label>
+                    <select class="form-control">
+                        <option>2017-12-01</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label>Fecha Fin</label>
+                    <select class="form-control">
+                        <option>2017-12-15</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label>Sucursal</label>
+                    <select class="form-control">
+                        <option>-Todas-</option>
+                        <option>Actopan</option>
+                        <option>Ixmiquilpan</option>
+                        <option>Atotonilco</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <label>&nbsp;_</label>
+                    <button class="btn btn-warning btn-rounded">Generar Resumen</button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <h2>$ 200,000.00</h2>
+                        </div>
+                        <div class="panel-footer"> <b> <i class="fa fa-download" aria-hidden="true"></i> Ingresos </b> </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <h2>$ 100,000.00</h2>
+                        </div>
+                        <div class="panel-footer"> <b> <i class="fa fa-upload" aria-hidden="true"></i> Gastos </b> </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <h2>267 / 97</h2>
+                        </div>
+                        <div class="panel-footer"> <b> <i class="fa fa-shopping-cart" aria-hidden="true"></i> Compras / Ventas </b> </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <h2>95</h2>
+                        </div>
+                        <div class="panel-footer"> <b> <i class="fa fa-random" aria-hidden="true"></i> Traspasos </b> </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- 1111 -->
+                    <div class="panel panel-default panel-lg">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h5><b> <i class="fa fa-list" aria-hidden="true"></i> Últimas Notas de Venta </b></h5>
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <table id="example" class="table table-hover" width="100%">
+                                    <thead>
+                                        <th>Folio</th>
+                                        <th width="20%">Cliente</th>
+                                        <th>Fecha de creación</th>
+                                        <th>Total</th>
+                                        <th>Estatus</th>
+                                        <th>Opciones</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="n in [1,2,3,4,5,6,7,8,9]">
+                                            <td>1202</td>
+                                            <td>Ventas de mostrador</td>
+                                            <td>2017-11-29</td>
+                                            <td>$2,900.00</td>
+                                            <td>
+                                                <span class="label label-success btn-rounded">
+                                                    pagada
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default dropdown-toggle btn-xs btn-rounded" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Opción <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li><a href="#"> <i class="fa fa-search" aria-hidden="true"></i> Vista Previa</a></li>
+                                                        <!-- <li><a href="#">Another action</a></li> -->
+                                                        <li><a href="#"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a></li>
+                                                        <li role="separator" class="divider"></li>
+                                                        <li><a href="#"> <i class="fa fa-print" aria-hidden="true"></i> Imprimir</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

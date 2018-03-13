@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <h4 class="pull-left" style="text-align: left;"><span ng-bind-html="currentUser"></span><br><small>Usuario</small></h4>
+                </div>
+                
+                <div class="col-md-6">&nbsp;</div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <br>
+            <div class="panel panel-default panel-lg" style="">
+                <div class="panel-heading" style="">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5><b> <i class="fa fa-usd" aria-hidden="true"></i> Caja</b></h5>
+                        </div>
+                    </div>                            
+                </div>
+                <div class="panel-body" style="height: 450px;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="example" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td><h5>Total en caja</h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h1 style="text-align: center;">{{ cajaResume.total | currency }}</h1>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <br><br>
+                                    </tr>
+
+                                    <tr>
+                                        <td><h5><b><small>Detalles</small></b></h5></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 14">
+                                            <b>Monto inicial de caja</b>
+                                            <span class="pull-right" style="">{{ cajaResume.inicial | currency }}</span>
+                                            <!-- <button class="btn btn-default"> Ver Salidas </button> -->
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-size: 14">
+                                            <b><a href="" style="color: #c00;">Ventas</a></b>
+                                            <span class="pull-right" style="">{{ cajaResume.ventas | currency }}</span>
+                                            <!-- <button class="btn btn-default"> Ver Entradas </button> -->
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-size: 14">
+                                            <b><a href="" style="color: #c00;">Gastos</a></b>
+                                            <span class="pull-right" style="">{{ cajaResume.gastos | currency }}</span>
+                                            <!-- <button class="btn btn-default"> Ver Salidas </button> -->
+                                        </td>
+                                    </tr>
+
+                                    <!-- <tr>
+                                        <td style="font-size: 14">
+                                            <b>Total</b>
+                                            <span class="pull-right" style="">{{ cajaResume.total | currency }}</span>
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <br>
+            <div class="panel panel-default panel-lg">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5><b> <i class="fa fa-usd" aria-hidden="true"></i> Registrar Gasto</b></h5>
+                        </div>
+                    </div>                            
+                </div>
+                <div class="panel-body" style="height: 450px; overflow-y: auto;">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Tipo de Gasto</label>
+                            <select class="form-control" ng-model="idTipoGasto">
+                                <option value="{{gas.idGastoTipo}}" ng-repeat="(key, gas) in tipoGasto.data" ng-bind-html="gas.gati_descripcion"></option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label>Monto</label>
+                            <input type="number" ng-model="montoGasto" class="form-control" placeholder="0.00" style="text-align: right;">
+                        </div>
+
+                        <div class="col-sm-12"><br>
+                            <label>Motivo del gasto</label>
+                            <input ng-model="motivoGasto" class="form-control" placeholder="Describe el motivo del gasto">
+                        </div>
+
+                        <div class="col-sm-12"><br><br>
+                            <button class="btn btn-default pull-right" ng-click="registrarGasto();">
+                                <i class="fa fa-money" aria-hidden="true"></i> Registrar gasto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+<div procesar-mezcla class="procesaCompra" ng-show="procesaMezcla"></div>

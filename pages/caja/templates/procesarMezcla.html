@@ -1,0 +1,29 @@
+<div class="row" ng-show="!gracias">
+    <div nota-mezcla class="col-sm-6"></div>
+    <div class="col-sm-6">
+        <div style="width: 300px; height: 100px; margin: 100px auto; background-color: white;">
+            <h5><i>Formula:</i></h5>
+            <h3 style="text-align: left;"> {{nombreformula[0].pro_nombre}} </h3>
+            <br>
+
+            <h5><i>Cantidad resultante:</i></h5>
+            <h3 style="text-align: left;"> {{cantidadMezcla}} Unidades</h3>
+            <br>
+
+            <h5><i>Observaciones:</i></h5>
+            <p ng-bind-html="obs_mezcla"></p>
+            <br>
+            
+            <br>
+            <button class="btn btn-success" style="width: 100%; height: 45px;" ng-click="finalizarMezcla();"> FINALIZAR MEZCLA </button>
+            <br><br>
+            <button class="btn btn-default" style="width: 100%" ng-click="procesarCancel();">Regresar</button>
+        </div>
+    </div>
+</div>
+<div class="row" ng-show="gracias">
+    <div style="width: 300px; margin: 150px auto; text-align: center;">
+        <img src="images/logo-circulo-3.png" width="180"><br>
+        <h1 style="font-size: 40px">¡Listo!</h1>        
+    </div>
+</div>

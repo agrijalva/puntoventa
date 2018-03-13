@@ -1,0 +1,193 @@
+<div ng-init="Init();">
+    <div class=jumbotron>
+        <div class=container>
+            <div class="row">   
+                <div class="col-sm-6"> <h3> <i class="fa fa-bars" aria-hidden="true"></i> &nbsp; STOCK / ACTOPAN <small>Tiempo real</small></h3> </div>
+                <div class="col-sm-6"> 
+                    <button class="pull-right btn btn-warning btn-rounded">
+                        &nbsp;&nbsp;<i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Descargar Stock&nbsp;&nbsp;
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default panel-lg">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h5><b> <i class="fa fa-list" aria-hidden="true"></i> Listado</b></h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control search-input" ng-model="search" placeholder="Buscar ... ">
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <table id="example" class="table table-hover" width="100%">
+                                    <thead>
+                                        <th>SKU</th>
+                                        <th>PRODUCTO</th>
+                                        <th>DESCRIPCIÓN</th>
+                                        <!-- <th width="50">PRECIO/COMPRA</th> -->
+                                        <th width="50">CANTIDAD</th>
+                                        <th width="50">-</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="pro in productos | filter: search">
+                                            <td>9372</td>
+                                            <td>{{ pro }}</td>
+                                            <td>Esta sera una descripción más larga.</td>
+                                            <td class="">32.00</td>
+                                            <td> 
+                                                <a class="pull-right btn btn-default btn-rounded btn-xs" ng-click="modalAjuste()">
+                                                    &nbsp;&nbsp;<i class="fa fa-sliders" aria-hidden="true"></i>&nbsp; Ajustar cantidad&nbsp;&nbsp;
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a ui-sref=inventarios class="pull-left btn btn-default btn-rounded">
+                                        &nbsp;&nbsp;<i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp; Regresar&nbsp;&nbsp;
+                                    </a>
+
+                                    <button class="pull-right btn btn-warning btn-rounded">
+                                        &nbsp;&nbsp;<i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Descargar Stock&nbsp;&nbsp;
+                                    </button>
+
+                                    <button type="button" class="pull-right btn btn-default btn-rounded btn-space" data-toggle="modal" data-target="#myModal">
+                                        &nbsp;&nbsp;<i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Formato para Inventario&nbsp;&nbsp;
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <p> <a class="btn btn-primary btn-lg btn-outline btn-rounded">Learn more</a> </p> -->
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h4 class="modal-title" id="myModalLabel">Formato para inventario físico</h4>                    
+                    </div>                
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-warning btn-rounded pull-right" ng-click="printFormato();">
+                            <i class="fa fa-print" aria-hidden="true"></i> Imprimir
+                        </button>
+                    </div>                    
+                </div>
+            </div>
+            <div class="modal-body" id="formatoInventario">
+                <div class="row cuerpo" style="font-family: arial; font-size: 10px;">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-lg">
+                            <div class="panel-heading">
+                                <table border="0" width="100%">
+                                    <tr>
+                                        <td><span style="font-size: 18px"><b>INVENTARIO DIC/2017</b></span></td>
+                                        <td align="right"><span style="font-size: 18px"><b>ACTOPAN</b></span></td>
+                                    </tr>
+                                </table>                           
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <table id="example" class="table table-hover border-white" width="100%" border="1" cellpadding="5" cellspacing="0">
+                                        <thead>
+                                            <th width="60px">SKU</th>
+                                            <th width="400px">PRODUCTO</th>
+                                            <th align="right">CANTIDAD SISTEMA</th>
+                                            <th align="right">CANTIDAD FÍSICO</th>
+                                            <th width="400px">OBSERVACIONES</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="pro in productos | filter: search">
+                                                <td valign="top" style="font-size: 11px;">9372 &nbsp;</td>
+                                                <td valign="top" style="font-size: 11px;">
+                                                    {{ pro }}<br>
+                                                    <!-- <small>Esta sera una descripción maás larga que las demas para ver como se comporta en la impresión.</small> -->
+                                                </td>
+                                                <td class="" valign="top" align="right" style="font-size: 11px;"><br> 32.00 </td>
+                                                <td align="right"><br>  </td>
+                                                <td align="right"><br>  </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning btn-rounded" ng-click="printFormato();"> <i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Ajustar Stock -->
+<div class="modal fade" id="myModalAjuste" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ajuste de Stock de Productos</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Por favor ingresa la siguiente información <small>(Los campos con * son obligatorios)</small></h5>
+                            </div>
+                            <div class="col-sm-12">
+                                <h3>SKU: 3123</h3>
+                                <h3>BASE BORREGO <br><small>Esta es la descripcion del producto</small></h3>
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Cantidad Sistema</b>
+                                <h3>31.50 kg</h3>
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Cantidad <span class="text-danger">*</span></b>
+                                <input type="" name="" class="form-control" value="31.50">
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <b>Descripción <span class="text-danger">*</span></b>
+                                <textarea name="" class="form-control"></textarea>
+                                <br>
+                            </div>
+                            <div class="col-sm-12">
+                                <!-- <p class="text-danger">NOTA: La cantidad proporcionada debe ser la suma o la resta </p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning btn-rounded"> <i class="fa fa-sliders"></i> Actualizar Stock</button>
+            </div>
+        </div>
+    </div>
+</div>

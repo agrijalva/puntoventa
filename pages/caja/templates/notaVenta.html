@@ -1,0 +1,61 @@
+<div class="col-sm-3">
+    <center>
+    <img src="images/logo-circulo-3.png" width="60%" style="margin-top: 5px;">
+    </center>
+</div>
+<div class="col-sm-9">
+    <h1>FORRAJERA AS DE OROS<br><br></h1>
+</div>
+
+<!-- Linea de datos del cliente -->
+<div class="col-sm-2">
+    <span style="font-size: 14px; font-weight: bold;">Cliente:</span>
+</div>
+<div class="col-sm-7">
+    <div style="width: 100%; border-bottom: solid 1px black;">&nbsp;</div>
+</div>
+<div class="col-sm-3">
+    <span style="font-size: 14px; font-weight: bold;">Fecha: {{ fechaStr }}</span>
+</div>
+
+<div class="col-sm-12">
+    <table id="example" class="table" width="100%">
+        <thead>
+            <th>SKU</th>
+            <th>PRODUCTO</th>
+            <th>UNIDAD</th>
+            <th width="80">CANTIDAD</th>
+            <th width="80" style="text-align: right;">PRECIO</th>
+            <th width="80" style="text-align: right;">IMPORTE</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(key, pro) in Carrito | filter: search" style="text-transform: uppercase;">
+                <td>{{ pro.pro_sku }}</td>
+                <td> <span ng-bind-html="pro.pro_nombre"></span> </td>
+                <td ng-bind-html="pro.pro_unidad"></td>
+                <td style="text-align: right;"> {{ pro.cantidad }} </td>
+                <td style="text-align: right;">{{ pro.precio_venta | currency }}</td>
+                <td style="text-align: right;">{{ pro.cantidad * pro.precio_venta | currency }}</td>
+            </tr>
+
+            <tr ng-repeat="rel in Relleno">
+                <td colspan="6">&nbsp;</td>
+            </tr>
+
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <td style="text-align: right;" colspan="5"> <b>TOTAL:</b> </td>
+                <td style="text-align: right;"> <b>{{ resumen.subtotal | currency }}</b> </td>
+            </tr>
+            <tr>
+                <td colspan="6" style="text-align: right;">
+                    {{ totalLetra }}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div nota-venta-print style="display: none;" id="notaVenta" ></div>

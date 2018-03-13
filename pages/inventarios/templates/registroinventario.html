@@ -1,0 +1,163 @@
+<div ng-init="initDetalle();">
+    <div class=jumbotron>
+        <div class=container>
+            <div class="row">   
+                <div class="col-sm-6"> <h3> <i class="fa fa-bars" aria-hidden="true"></i> &nbsp; <span ng-bind-html="Titulo"></span></h3> </div>
+                <div class="col-sm-6"> 
+<!--                     <button class="pull-right btn btn-warning btn-rounded">
+                        &nbsp;&nbsp;<i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Descargar Stock&nbsp;&nbsp;
+                    </button>
+ -->
+                    <button type="button" class="pull-right btn btn-default btn-rounded btn-space" ng-click="formatoInventarioModal();">
+                        &nbsp;&nbsp;<i class="fa fa-print" aria-hidden="true"></i>&nbsp; Formato para Inventario&nbsp;&nbsp;
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default panel-lg">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h5><b> <i class="fa fa-list" aria-hidden="true"></i> Listado</b></h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control search-input" ng-model="search" placeholder="Buscar ... ">
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <table id="example" class="table table-hover" width="100%">
+                                    <thead>
+                                        <th>SKU</th>
+                                        <th>PRODUCTO</th>
+                                        <th width="50">CANTIDAD SISTEMA</th>
+                                        <th width="50" ng-show="idCatalogoUsuario != 3">CANTIDAD FÍSICO</th>
+                                        <th>OBSERVACIONES</th>
+                                        <th>&nbsp;</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="pro in stockInventario.data | filter: search">
+                                            <td ng-bind-html="pro.pro_sku"></td>
+                                            <td>
+                                                <span ng-bind-html="pro.pro_nombre"></span><br>
+                                                <small style="text-transform: uppercase;">{{ pro.pro_unidad }}</small> <small ng-bind-html="pro.pro_descripcion"></small>
+                                            </td>
+                                            <td class="">{{ pro.cantidadSistema }}</td>
+                                            <td ng-show="idCatalogoUsuario != 3">
+                                                <input type="" name="" class="form-control" ng-model="pro.cantidadFisico">
+                                            </td>
+                                            <td>
+                                                <span ng-show="idCatalogoUsuario == 3"> {{ pro.descripcion }} </span>
+                                                <input ng-show="idCatalogoUsuario != 3" class="form-control" placeholder="Escribe tus observaciones" ng-model="pro.descripcion">
+                                            </td>
+                                            <td>
+                                                <a ng-show="pro.request.data.success == false" href="#" data-toggle="tooltip" title="{{pro.request.data.msg}}" class="text-danger" style="font-size: 20px">
+                                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                                </a>
+
+                                                <a ng-show="pro.request.data.success == true" href="#" data-toggle="tooltip" title="{{pro.request.data.msg}}" class="text-success" style="font-size: 20px">
+                                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a ui-sref=inventarios class="pull-left btn btn-default btn-rounded">
+                                        &nbsp;&nbsp;<i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp; Regresar&nbsp;&nbsp;
+                                    </a>
+
+                                    <button type="button" class="pull-left btn btn-default btn-rounded btn-space" ng-click="formatoInventarioModal();">
+                                        &nbsp;&nbsp;<i class="fa fa-print" aria-hidden="true"></i>&nbsp; Formato para Inventario&nbsp;&nbsp;
+                                    </button>
+
+                                    <button class="pull-right btn btn-warning btn-rounded" ng-click="registrarInventario();" ng-show="idCatalogoUsuario != 3">
+                                        &nbsp;&nbsp;<i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Guardar Inventario&nbsp;&nbsp;
+                                    </button>
+
+                                    <button type="button" class="pull-right btn btn-default btn-rounded btn-space" ng-show="idCatalogoUsuario != 3">
+                                        &nbsp;&nbsp;<i class="fa fa-check" aria-hidden="true"></i>&nbsp; Cerrar Inventario&nbsp;&nbsp;
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <p> <a class="btn btn-primary btn-lg btn-outline btn-rounded">Learn more</a> </p> -->
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h4 class="modal-title" id="myModalLabel">Formato para inventario físico</h4>                    
+                    </div>                
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-warning btn-rounded pull-right" ng-click="printFormato();">
+                            <i class="fa fa-print" aria-hidden="true"></i> Imprimir
+                        </button>
+                    </div>                    
+                </div>
+            </div>
+            <div class="modal-body" id="formatoInventario">
+                <div class="row cuerpo" style="font-family: arial; font-size: 10px;">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-lg">
+                            <div class="panel-heading">
+                                <table border="0" width="100%">
+                                    <tr>
+                                        <td><span style="font-size: 18px"><b ng-bind-html="Titulo"></b></span></td>
+                                        <td align="right"><span style="font-size: 18px"><b id="fecha_str"></b></span></td>
+                                    </tr>
+                                </table>                           
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <table id="example" class="table table-hover border-white" width="100%" border="1" cellpadding="5" cellspacing="0">
+                                        <thead>
+                                            <th width="60px">SKU</th>
+                                            <th width="400px">PRODUCTO</th>
+                                            <th align="right">CANTIDAD SISTEMA</th>
+                                            <th align="right">CANTIDAD FÍSICO</th>
+                                            <th width="400px">OBSERVACIONES</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="pro in stockInventario.data">
+                                                <td valign="top" style="font-size: 11px;"><span ng-bind-html="pro.pro_sku"></span> &nbsp;</td>
+                                                <td valign="top" style="font-size: 11px;">
+                                                    <span ng-bind-html="pro.pro_nombre"></span><br>
+                                                    <small style="text-transform: uppercase;">{{ pro.pro_unidad }}</small> <small ng-bind-html="pro.pro_descripcion"></small>
+                                                </td>
+                                                <td class="" valign="top" align="right" style="font-size: 11px;"><br> {{ pro.cantidadSistema }} </td>
+                                                <td align="right"><br>  </td>
+                                                <td align="right"><br>  </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning btn-rounded" ng-click="printFormato();"> <i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>
+            </div>
+        </div>
+    </div>
+</div>
