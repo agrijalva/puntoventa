@@ -14,7 +14,9 @@
         					<tr>
         						<td width="80"> <span style="font-size: 12px; font-weight: bold;">Cliente:</span> </td>
         						<td width="290">_____________________________</td>
-        						<td width="200" style="text-align: right;"> <span style="font-size: 12px; font-weight: bold;">Fecha: {{ fechaStr }}</span> </td>
+        						<td width="200" style="text-align: right;"> 
+                                    <span style="font-size: 12px; font-weight: bold;"><small>{{ fechaStr }}</small></span> 
+                                </td>
         					</tr>
         				</table>
         			</td>
@@ -90,7 +92,9 @@
         					<tr>
         						<td width="80"> <span style="font-size: 12px; font-weight: bold;">Cliente:</span> </td>
         						<td width="290">_____________________________</td>
-        						<td width="200" style="text-align: right;"> <span style="font-size: 12px; font-weight: bold;">Fecha: {{ fechaStr }}</span> </td>
+        						<td width="200" style="text-align: right;"> 
+                                    <span style="font-size: 12px; font-weight: bold;"><small>{{ fechaStr }}</small></span> 
+                                </td>
         					</tr>
         				</table>
         			</td>
@@ -102,12 +106,14 @@
         			<td colspan="3">
         				<table id="example" class="table" width="100%" style="font-size: 11px;" border="1" cellspacing="0" cellpadding="2">
 					        <thead>
-					            <!-- <th>SKU</th> -->
-					            <th style="text-align: left;">PRODUCTO</th>
-					            <th style="text-align: right;">UNIDAD</th>
-					            <th width="60">CANTIDAD</th>
-					            <th width="60" style="text-align: right;">PRECIO</th>
-					            <th width="60" style="text-align: right;">IMPORTE</th>
+                                <tr style="border-top:solid 3px #666;">
+    					            <!-- <th>SKU</th> -->
+    					            <th style="text-align: left;">PRODUCTO</th>
+    					            <th style="text-align: right;">UNIDAD</th>
+    					            <th width="60">CANTIDAD</th>
+    					            <th width="60" style="text-align: right;">PRECIO</th>
+    					            <th width="60" style="text-align: right;">IMPORTE</th>
+                                </tr>
 					        </thead>
 					        <tbody>
 					            <tr ng-repeat="(key, pro) in Carrito | filter: search" style="text-transform: uppercase;">

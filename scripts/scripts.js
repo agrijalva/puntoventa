@@ -1,5 +1,5 @@
 "use strict";
-var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.carousel","angucomplete-alt"]).config(["$stateProvider", "$urlRouterProvider", function(r, t) {
+var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.carousel","angucomplete-alt","ngMaterial","ngMessages"]).config(["$stateProvider", "$urlRouterProvider", function(r, t) {
     t.when("/admin", "/admin/overview"), t.otherwise("/login"), 
     r.state("base", {
         "abstract": !0,
@@ -24,8 +24,8 @@ var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.car
         url: "/resumen",
         parent: "admin",
         cache:false,
-        templateUrl: "pages/configurador/configurador.html",
-        controller: "ConfiguradorCtrl"
+        templateUrl: "pages/dashboard/dashboard.html",
+        controller: "DashboardCtrl"
     })
     .state("productos", {
         url: "/productos",
@@ -78,14 +78,22 @@ var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.car
     })
 }]);
 
-
-var API_Path = "http://localhost/puntoventaAPI/v1/index.php"
 var Authorization = 'eb60959f5eac3e1d081244c33d4fb850';
 
 
+app.config(function($mdDateLocaleProvider) {
+    $mdDateLocaleProvider.formatDate = function(date) {
+       return moment(date).format('YYYY-MM-DD');
+    };
+});
+// ============ [ v1.0.0 ]
+// var API_Path = "http://localhost/puntoventaAPI/v1/index.php"
 
-angular.module("yapp").controller("DashboardCtrl", ["$scope", "$state", function(r, t) {
+// ============ [ v1.3.0 ]
+var API_Path = "http://localhost/puntoventaAPI/v1.3/index.php"
 
-    r.$state = t
+// angular.module("yapp").controller("DashboardCtrl", ["$scope", "$state", function(r, t) {
 
-}]);
+//     r.$state = t
+
+// }]);

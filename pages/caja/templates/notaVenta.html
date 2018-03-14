@@ -15,18 +15,23 @@
     <div style="width: 100%; border-bottom: solid 1px black;">&nbsp;</div>
 </div>
 <div class="col-sm-3">
-    <span style="font-size: 14px; font-weight: bold;">Fecha: {{ fechaStr }}</span>
+    <span style="font-size: 14px; font-weight: bold;">
+        <small>{{ fechaStr }}</small>
+    </span>
 </div>
 
 <div class="col-sm-12">
+    <br>
     <table id="example" class="table" width="100%">
         <thead>
-            <th>SKU</th>
-            <th>PRODUCTO</th>
-            <th>UNIDAD</th>
-            <th width="80">CANTIDAD</th>
-            <th width="80" style="text-align: right;">PRECIO</th>
-            <th width="80" style="text-align: right;">IMPORTE</th>
+            <tr style="border-top:solid 3px #ddd;">
+                <th>SKU</th>
+                <th>PRODUCTO</th>
+                <th>UNIDAD</th>
+                <th width="80">CANTIDAD</th>
+                <th width="80" style="text-align: right;">PRECIO</th>
+                <th width="80" style="text-align: right;">IMPORTE</th>
+            </tr>
         </thead>
         <tbody>
             <tr ng-repeat="(key, pro) in Carrito | filter: search" style="text-transform: uppercase;">

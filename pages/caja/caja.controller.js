@@ -11,6 +11,16 @@ app.controller("CajaCtrl", ["$scope", "$location","filterFilter","productosFacto
     $scope.Productos        = [];
     $scope.Autocomplete     = [];
     $scope.Carrito          = [];
+    $scope.Iconitos         = [
+        "",
+        "fa-shopping-bag",
+        "fa-money",
+        "fa-shopping-basket",
+        "fa-thumbs-up",
+        "fa-shopping-cart"
+    ];
+    var random = Math.floor((Math.random() * 5 ) + 1);
+    $scope.Icono = $scope.Iconitos[ random ];
 
     $scope.Relleno          = [];
     $scope.RellenoLimit     = 15;
@@ -258,10 +268,7 @@ app.controller("CajaCtrl", ["$scope", "$location","filterFilter","productosFacto
     }
 
     $scope.procesarCompra = function(){
-        var fecha = new Date();
-        var mes = (fecha.getMonth()+1) < 10 ? '0' + (fecha.getMonth()+1) : (fecha.getMonth()+1);
-        var dia = fecha.getDate() < 10 ? '0' + fecha.getDate() : fecha.getDate();
-        $scope.fechaStr = fecha.getFullYear()+"/"+mes+"/"+dia;
+        $scope.fechaStr = $scope.getTime();
 
     	if( $scope.Carrito.length == 0 ){
     		swal("Punto de Venta", "No hay productos agregados")
@@ -277,10 +284,7 @@ app.controller("CajaCtrl", ["$scope", "$location","filterFilter","productosFacto
     }
 
     $scope.procesarEntrada = function(){
-        var fecha = new Date();
-        var mes = (fecha.getMonth()+1) < 10 ? '0' + (fecha.getMonth()+1) : (fecha.getMonth()+1);
-        var dia = fecha.getDate() < 10 ? '0' + fecha.getDate() : fecha.getDate();
-        $scope.fechaStr = fecha.getFullYear()+"/"+mes+"/"+dia;
+        $scope.fechaStr = $scope.getTime();
 
         if( $scope.Carrito.length == 0 ){
             swal("Punto de Venta", "No hay productos agregados")
@@ -296,10 +300,7 @@ app.controller("CajaCtrl", ["$scope", "$location","filterFilter","productosFacto
     }
 
     $scope.procesarTraspaso = function(){
-        var fecha = new Date();
-        var mes = (fecha.getMonth()+1) < 10 ? '0' + (fecha.getMonth()+1) : (fecha.getMonth()+1);
-        var dia = fecha.getDate() < 10 ? '0' + fecha.getDate() : fecha.getDate();
-        $scope.fechaStr = fecha.getFullYear()+"/"+mes+"/"+dia;
+        $scope.fechaStr = $scope.getTime();
 
         if( $scope.Carrito.length == 0 ){
             swal("Punto de Venta", "No hay productos agregados")
@@ -335,10 +336,7 @@ app.controller("CajaCtrl", ["$scope", "$location","filterFilter","productosFacto
     }
 
     $scope.procesarMezcla = function(){
-        var fecha = new Date();
-        var mes = (fecha.getMonth()+1) < 10 ? '0' + (fecha.getMonth()+1) : (fecha.getMonth()+1);
-        var dia = fecha.getDate() < 10 ? '0' + fecha.getDate() : fecha.getDate();
-        $scope.fechaStr = fecha.getFullYear()+"/"+mes+"/"+dia;
+        $scope.fechaStr = $scope.getTime();
 
         if( $scope.Carrito.length == 0 ){
             swal("Punto de Venta", "No hay productos agregados")
@@ -434,38 +432,42 @@ app.controller("CajaCtrl", ["$scope", "$location","filterFilter","productosFacto
 
         cajaFactory.entradacabecera( cabecera ).then(function(result){
             var header = result.data;
-            $scope.Carrito.forEach( function( item, key ){
-                var detalle = {
-                    idCheckIn: header.LastId,
-                    idProducto: item.idProducto,
-                    cod_cantidad: item.cantidad,
-                    cod_observaciones: item.entrada_descripcion
-                }
-                $scope.folio = header.folio;
-
-                cajaFactory.entradadetalle( detalle ).then(function(result){
-                    if( result.length != 0 ){
-                        incremental++;
-                        if( incremental == ($scope.Carrito.length) ){
-                            $scope.print('notaEntrada');
-
-                            $scope.procesaEntrada = false;
-                            $scope.Carrito = [];
-                            $scope.resumen       = {
-                                subtotal: 0,
-                                iva:0,
-                                total:0,
-                                productos:0
-                            };
-
-                            $scope.cargaProductos();
-                        }
+            if( header.success ){
+                $scope.Carrito.forEach( function( item, key ){
+                    var detalle = {
+                        idCheckIn: header.LastId,
+                        idProducto: item.idProducto,
+                        cod_cantidad: item.cantidad,
+                        cod_observaciones: item.entrada_descripcion
                     }
-                }, function(error){
-                    console.log("Error", error);
-                }); 
-            });
+                    $scope.folio = header.folio;
 
+                    cajaFactory.entradadetalle( detalle ).then(function(result){
+                        if( result.length != 0 ){
+                            incremental++;
+                            if( incremental == ($scope.Carrito.length) ){
+                                $scope.print('notaEntrada');
+
+                                $scope.procesaEntrada = false;
+                                $scope.Carrito = [];
+                                $scope.resumen       = {
+                                    subtotal: 0,
+                                    iva:0,
+                                    total:0,
+                                    productos:0
+                                };
+
+                                $scope.cargaProductos();
+                            }
+                        }
+                    }, function(error){
+                        console.log("Error", error);
+                    }); 
+                });
+            }
+            else{
+                swal("Punto de Venta", header.msg);
+            }
         }, function(error){
             console.log("Error", error);
         });
@@ -496,44 +498,49 @@ app.controller("CajaCtrl", ["$scope", "$location","filterFilter","productosFacto
 
             cajaFactory.traspasocabecera( cabecera ).then(function(result){
                 var header = result.data;
-                $scope.Carrito.forEach( function( item, key ){
-                    var detalle = {
-                        CheckId: header.LastId,
-                        idProducto: item.idProducto,
-                        cod_cantidad: item.cantidad,
-                        cod_observaciones: item.entrada_descripcion,
-                        Tipo: $scope.tipoTraspaso,
-                        idTraspado: header.Traspaso
-                    }
-                    $scope.folio = header.folio;
-
-                    cajaFactory.traspasodadetalle( detalle ).then(function(result){
-                        if( result.length != 0 ){
-                            incremental++;
-                            if( incremental == ($scope.Carrito.length) ){
-                                $scope.print('notaTraspaso');
-
-                                $scope.procesaTraspaso = false;
-                                $scope.Carrito = [];
-                                $scope.resumen       = {
-                                    subtotal: 0,
-                                    iva:0,
-                                    total:0,
-                                    productos:0
-                                };
-
-                                $scope.tipoTraspaso = 1;
-                                $scope.idSucOrigen  = 0;
-                                $scope.idSucDestino = 0;
-                                $scope.obs_traspaso = '';
-
-                                $scope.cargaProductos();
-                            }
+                if( header.success ){
+                    $scope.Carrito.forEach( function( item, key ){
+                        var detalle = {
+                            CheckId: header.LastId,
+                            idProducto: item.idProducto,
+                            cod_cantidad: item.cantidad,
+                            cod_observaciones: item.entrada_descripcion,
+                            Tipo: $scope.tipoTraspaso,
+                            idTraspado: header.Traspaso
                         }
-                    }, function(error){
-                        console.log("Error", error);
-                    }); 
-                });
+                        $scope.folio = header.folio;
+
+                        cajaFactory.traspasodadetalle( detalle ).then(function(result){
+                            if( result.length != 0 ){
+                                incremental++;
+                                if( incremental == ($scope.Carrito.length) ){
+                                    $scope.print('notaTraspaso');
+
+                                    $scope.procesaTraspaso = false;
+                                    $scope.Carrito = [];
+                                    $scope.resumen       = {
+                                        subtotal: 0,
+                                        iva:0,
+                                        total:0,
+                                        productos:0
+                                    };
+
+                                    $scope.tipoTraspaso = 1;
+                                    $scope.idSucOrigen  = 0;
+                                    $scope.idSucDestino = 0;
+                                    $scope.obs_traspaso = '';
+
+                                    $scope.cargaProductos();
+                                }
+                            }
+                        }, function(error){
+                            console.log("Error", error);
+                        }); 
+                    });
+                }
+                else{
+                    swal("Punto de Venta", header.msg);
+                }
 
             }, function(error){
                 console.log("Error", error);
@@ -656,6 +663,8 @@ app.controller("CajaCtrl", ["$scope", "$location","filterFilter","productosFacto
 
     $scope.showPVenta = function(){
         if( $scope.idCaja == 0 ){
+            var random = Math.floor((Math.random() * 5 ) + 1);
+            $scope.Icono = $scope.Iconitos[ random ];
             $scope.procesaCaja    = true;
             $scope.entradasBool   = false;
             $scope.tarspasoBool   = false;
@@ -928,6 +937,16 @@ app.controller("CajaCtrl", ["$scope", "$location","filterFilter","productosFacto
         }, function(error){
             console.log("Error", error);
         }); 
+    }
+
+    $scope.getTime = function(){
+        var fecha   = new Date();
+        var mes     = (fecha.getMonth()+1) < 10 ? '0' + (fecha.getMonth()+1) : (fecha.getMonth()+1);
+        var dia     = fecha.getDate() < 10 ? '0' + fecha.getDate() : fecha.getDate();
+        var hora    = fecha.getHours() < 10 ? '0' + fecha.getHours() : fecha.getHours();
+        var minutos = fecha.getMinutes() < 10 ? '0' + fecha.getMinutes() : fecha.getMinutes();
+        
+        return fecha.getFullYear() + "/" + mes + "/" + dia + " " + hora + ":" + minutos;
     }
 
     $scope.numero0 = function(num){
