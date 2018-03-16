@@ -1,0 +1,20 @@
+<div class="dash-panel">
+    <center>
+        <i class="fa fa-money text-orange" style="font-size: 60px"></i>
+        <br>
+        <span>TOTAL EN GASTOS</span>
+        <hr>
+        <span class="dash-resumen">$ 1,213.12</span>
+        <hr>
+    </center>
+    <ul class="nav">
+        <li> <a href="" ng-click="controlPanel('gastos','notas');"> Ver Notas</a> </li>
+        <li> <a href="" ng-click="controlPanel('gastos','analisis');"> Reporte por Rubro</a> </li>
+    </ul>
+    <hr>
+    <menu-listas></menu-listas>
+</div>
+<br>
+<button class="btn btn-danger" style="width: 100%" ng-click="controlPanelReturn()"> 
+    <i class="fa fa-chevron-left" aria-hidden="true"></i> Regresar 
+</button>

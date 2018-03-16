@@ -1,0 +1,82 @@
+<div ng-init="Init();">
+    <div class=jumbotron>
+        <div class=container>
+            <div class="row">   
+                <div class="col-sm-12"> 
+                    <h3 style="text-transform: uppercase;"> 
+                        <i class="fa fa-area-chart text-danger" aria-hidden="true"></i> &nbsp; <small>SUCURSAL</small> {{currentSucursal.suc_nombre}}
+                    </h3>
+                </div>
+            </div>            
+            <hr>
+            <div class="row md-controlado">
+                <div class="col-sm-3">
+                    <form name="myForm" flex-gt-xs>
+                        <md-input-container>
+                            <label>Fecha de Inicio</label>
+                            <md-datepicker ng-model="ctrl.myDate1" name="dateField" md-min-date="ctrl.minDate" 
+                            md-max-date="ctrl.maxDate"></md-datepicker>
+                      </md-input-container>
+                    </form>
+                </div>
+                <div class="col-sm-3">
+                    <form name="myForm" flex-gt-xs>
+                      <md-input-container>
+                        <label>Fecha Final</label>
+                        <md-datepicker ng-model="ctrl.myDate2" name="dateField" md-min-date="ctrl.minDate"
+                          md-max-date="ctrl.maxDate"></md-datepicker>
+                      </md-input-container>
+                    </form>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-warning btn-rounded" ng-click="controlPanel('ventas','notas');">Generar Resumen</button>
+                </div>
+            </div>
+            <hr style="margin-top: 0 !important;">
+
+            <!-- Resumen de los Totales -->
+            <div resumen-totales ng-show="panel.resumen"></div>
+
+            <!-- Seccion de paneles para Reporte de Ventas -->
+            <div ng-controller="DashVentas">
+                <div venta-notas ng-show="panel.ventas.notas"></div>
+                <div venta-productos-vendidos ng-show="panel.ventas.analisis"></div>
+            </div>
+            <!-- / -->
+
+            <!-- Seccion de paneles para Reporte de Gastos -->
+            <div ng-controller="DashGastos">
+                <div gastos-notas ng-show="panel.gastos.notas"></div>
+                <div gastos-rubro ng-show="panel.gastos.analisis"></div>
+            </div>
+            <!-- / -->
+
+            <!-- Seccion de paneles para Reporte de Entradas -->
+            <div ng-controller="DashEntradas">
+                <div entradas-notas ng-show="panel.entradas.notas"></div>
+                <div entradas-productos-ingresados ng-show="panel.entradas.analisis"></div>
+            </div>
+            <!-- / -->
+
+            <!-- Seccion de paneles para Reporte de Traspasos -->
+            <div ng-controller="DashTraspasos">
+                <div traspasos-notas ng-show="panel.traspasos.notas"></div>
+                <div traspasos-entradas-salidas ng-show="panel.traspasos.analisis"></div>
+            </div>
+            <!-- / -->
+
+            <!-- Seccion de paneles para Reporte de Traspasos -->
+            <div ng-controller="DashMezclas">
+                <div mezclas-notas ng-show="panel.mezclas.notas"></div>
+                <div mezclas-comportamiento ng-show="panel.mezclas.analisis"></div>
+            </div>
+            <!-- / -->
+
+            <br><br>
+            <center ng-show="panel.resumen">
+                <p>Para acceder a los detalles de la información presiona el menú que corresponda</p>
+            </center>
+
+        </div>
+    </div>
+</div>

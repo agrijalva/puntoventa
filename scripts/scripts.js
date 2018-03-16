@@ -24,7 +24,7 @@ var app = angular.module("yapp", ["ui.router", "ngAnimate", "ngSanitize","ui.car
         url: "/resumen",
         parent: "admin",
         cache:false,
-        templateUrl: "pages/dashboard/dashboard.html",
+        templateUrl: "pages/dashboard/templates/dashboard.html",
         controller: "DashboardCtrl"
     })
     .state("productos", {
